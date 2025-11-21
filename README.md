@@ -28,7 +28,28 @@ To formulate a C program to convert a decimal number into its binary equivalent 
 ### Step 8: 
    Stop
 # Program:
+```
+#include<stdio.h>
+
+int main() {
+    int num, rem, binary[50], i = 0, k;
+    scanf("%d", &num);
+    while (num > 0) {
+        rem = num % 2;
+        binary[i] = rem;
+        i++;
+        num = num / 2;
+    }
+    for (k = i - 1; k >= 0; k--)
+        printf("%d", binary[k]);
+    return 0;
+}
+```
 # Output:
+```
+Input: 10
+Output: 1010
+```
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -67,7 +88,58 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 9: 
   Stop
 # Program:
+```
+#include<stdio.h>
+
+int main() {
+    int m, i, j, k, min, max, pos[2][2];
+    scanf("%d", &m);
+    int a[m][m];
+    for (i = 0; i < m; i++)
+        for (j = 0; j < m; j++)
+            scanf("%d", &a[i][j]);
+
+    for (i = 0; i < m; i++) {
+        min = a[i][0];
+        pos[0][0] = i; pos[0][1] = 0;
+        for (j = 1; j < m; j++) {
+            if (a[i][j] < min) {
+                min = a[i][j];
+                pos[0][0] = i; pos[0][1] = j;
+            }
+        }
+
+        j = pos[0][1];
+        max = a[0][j];
+        pos[1][0] = 0; pos[1][1] = j;
+        for (k = 1; k < m; k++) {
+            if (a[k][j] > max) {
+                max = a[k][j];
+                pos[1][0] = k; pos[1][1] = j;
+            }
+        }
+
+        if (min == max && pos[0][0] == pos[1][0]) {
+            printf("Saddle Point: %d at (%d, %d)", min, pos[0][0], pos[0][1]);
+            return 0;
+        }
+    }
+
+    printf("No saddle point");
+    return 0;
+}
+```
 # Output:
+```
+Input:
+3
+1 2 3
+4 5 6
+7 8 9
+
+Output:
+Saddle Point: 7 at (2, 0)
+```
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -101,7 +173,28 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 10: 
   Stop
 # Program:
+```
+#include<stdio.h>
+
+int main() {
+    char s[100], d[100];
+    int i, j, len = 0;
+    scanf("%[^\n]s", s);
+    while (s[len] != '\0')
+        len++;
+    j = 0;
+    for (i = len - 1; i >= 0; i--)
+        d[j++] = s[i];
+    d[j] = '\0';
+    printf("%s", d);
+    return 0;
+}
+```
 # Output:
+```
+Input: hello world
+Output: dlrow olleh
+```
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -135,7 +228,40 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 8:
   Stop
 # Program:
+```
+#include<stdio.h>
+#include<string.h>
+
+int main() {
+    char s[100];
+    int visited[256] = {0};
+    int i, j, count, n;
+    scanf("%[^\n]", s);
+    n = strlen(s);
+
+    for (i = 0; i < n; i++) {
+        if (visited[(unsigned char)s[i]] == 0) {
+            count = 0;
+            for (j = 0; j < n; j++) {
+                if (s[i] == s[j])
+                    count++;
+            }
+            printf("%c = %d\n", s[i], count);
+            visited[(unsigned char)s[i]] = 1;
+        }
+    }
+    return 0;
+}
+```
 # Output:
+```
+Input: apple
+Output:
+a = 1
+p = 2
+l = 1
+e = 1
+```
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -169,7 +295,49 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 8: 
   Stop
 # Program:
+```
+#include<stdio.h>
+#include<string.h>
+
+int main() {
+    char str[200], words[50][50];
+    int i, j, k = 0, w = 0, flag;
+
+    scanf("%[^\n]s", str);
+
+    for (i = 0; str[i] != '\0'; i++) {
+        if (str[i] != ' ')
+            words[w][k++] = str[i];
+        else {
+            words[w][k] = '\0';
+            w++;
+            k = 0;
+        }
+    }
+    words[w][k] = '\0';
+    w++;
+
+    for (i = 0; i < w; i++) {
+        if (words[i][0] == '\0')
+            continue;
+        for (j = i + 1; j < w; j++) {
+            if (strcmp(words[i], words[j]) == 0)
+                words[j][0] = '\0';
+        }
+    }
+
+    for (i = 0; i < w; i++) {
+        if (words[i][0] != '\0')
+            printf("%s ", words[i]);
+    }
+    return 0;
+}
+```
 # Output:
+```
+Input: welcome to c programming welcome to coding
+Output: welcome to c programming coding
+```
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
